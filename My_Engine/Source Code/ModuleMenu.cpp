@@ -158,13 +158,13 @@ update_status ModuleMenu::Update(float dt)
 		if (ImGui::BeginMenu("About"))
 		{
 			if (ImGui::MenuItem("Documentation"))
-				App->OpenBrowser("https://github.com/albertec1/Yet-another-janky-Engine/wiki");
+				App->OpenBrowser("https://github.com/AlexLA99/Kuma-Engine/wiki");
 
 			if (ImGui::MenuItem("Download latest"))
-				App->OpenBrowser("https://github.com/albertec1/Yet-another-janky-Engine/releases");
+				App->OpenBrowser("https://github.com/AlexLA99/Kuma-Engine/releases");
 
 			if (ImGui::MenuItem("Report a bug"))
-				App->OpenBrowser("https://github.com/albertec1/Yet-another-janky-Engine/issues");
+				App->OpenBrowser("https://github.com/AlexLA99/Kuma-Engine/issues");
 			ImGui::EndMenu();
 		}
 		ImGui::EndMenuBar();
