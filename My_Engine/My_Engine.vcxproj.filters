@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Code">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{448a4e09-4d0c-4904-8a68-f8781881a78d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{975c6057-51ca-44e2-83d3-7fe54a09621b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Dependencies">
+      <UniqueIdentifier>{4c40967a-48f3-48fc-96f2-e56a6b3ace86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Dependencies\glew">
+      <UniqueIdentifier>{613c30be-03e3-4ac2-a4f0-5d01f52a576c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Dependencies\ImGui">
+      <UniqueIdentifier>{4d5df2ae-c218-4c78-92aa-3496fc8098e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Dependencies\Assimp">
+      <UniqueIdentifier>{5524385b-85e4-4e31-a0b5-3fdbca772b56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Tools">
+      <UniqueIdentifier>{3aa83911-4af4-4f9c-9c62-0b695cae4ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Window">
+      <UniqueIdentifier>{89780085-36e3-4c72-b9db-5535215f7e8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Importers">
+      <UniqueIdentifier>{d2b543d8-7818-4594-8a45-936647f66dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Code\Dependencies\mmgr">
+      <UniqueIdentifier>{f3e98185-075f-4775-b3be-8bca2da13500}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source Code\Application.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\log.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Main.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleAudio.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleCamera3D.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleInput.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleMenu.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModulePhysics3D.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleRenderer3D.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleSceneIntro.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ModuleWindow.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Timer.cpp">
+      <Filter>Source Code</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Color.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\glmath.cpp">
+      <Filter>Containers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Light.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Primitive.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui_demo.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui_draw.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui_impl_opengl3.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui_impl_sdl.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\ImGui\imgui_widgets.cpp">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Window.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Win_Inspector.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Win_Configutation.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\TextureImporter.cpp">
+      <Filter>Source Code\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\MeshImporter.cpp">
+      <Filter>Source Code\Importers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Win_Hierarchy.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Win_Console.cpp">
+      <Filter>Source Code\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Dependencies\mmgr\mmgr.cpp">
+      <Filter>Source Code\Dependencies\mmgr</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source Code\Application.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Globals.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Module.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleAudio.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleCamera3D.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleInput.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleWindow.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleSceneIntro.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleRenderer3D.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModulePhysics3D.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ModuleMenu.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Timer.h">
+      <Filter>Source Code</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Color.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\glmath.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Light.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Primitive.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\glew\include\GL\eglew.h">
+      <Filter>Source Code\Dependencies\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\glew\include\GL\glew.h">
+      <Filter>Source Code\Dependencies\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\glew\include\GL\glxew.h">
+      <Filter>Source Code\Dependencies\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\glew\include\GL\wglew.h">
+      <Filter>Source Code\Dependencies\glew</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imconfig.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imgui.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imgui_impl_opengl3.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imgui_impl_sdl.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imgui_internal.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imstb_rectpack.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imstb_textedit.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\ImGui\imstb_truetype.h">
+      <Filter>Source Code\Dependencies\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\Assimp\include\cimport.h">
+      <Filter>Source Code\Dependencies\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\Assimp\include\postprocess.h">
+      <Filter>Source Code\Dependencies\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\Assimp\include\scene.h">
+      <Filter>Source Code\Dependencies\Assimp</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\OpenGl.h">
+      <Filter>Source Code\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ImGui.h">
+      <Filter>Source Code\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Assimp.h">
+      <Filter>Source Code\Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Window.h">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Win_Inspector.h">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Win_Configuration.h">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\TextureImporter.h">
+      <Filter>Source Code\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\MeshImporter.h">
+      <Filter>Source Code\Importers</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Win_Hierarchy.h">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Win_Console.h">
+      <Filter>Source Code\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\mmgr\nommgr.h">
+      <Filter>Source Code\Dependencies\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Dependencies\mmgr\mmgr.h">
+      <Filter>Source Code\Dependencies\mmgr</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Notes on openGL.txt" />
+  </ItemGroup>
+</Project>
