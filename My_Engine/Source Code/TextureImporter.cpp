@@ -103,14 +103,14 @@ TextureInfo* TextureImporter::ImportTexture(const aiScene* pScene, int i)
 			ilGenImages(1, &ImageName);
 			ilBindImage(ImageName);
 
-			if (!ilLoadImage(Path.data))
+			if (!ilLoadImage(tex->tex_path))
 			{
 				ILenum Error;
 				while ((Error = ilGetError()) != IL_NO_ERROR) {
 					LOG("%d: %s/n", Error, iluErrorString(Error));
 				}
 
-				LOG("Failed to load Image: %s.", Path.data);
+				LOG("Failed to load Image: %s.", tex->tex_path);
 			}
 			else
 			{

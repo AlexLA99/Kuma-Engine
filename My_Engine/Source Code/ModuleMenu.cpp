@@ -76,9 +76,9 @@ bool ModuleMenu::CleanUp()
 
 update_status ModuleMenu::Update(float dt)
 {
-	if ((App->input->GetKey(SDL_SCANCODE_LALT) == KEY_DOWN) && (App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN))
+	if (((App->input->GetKey(SDL_SCANCODE_LALT) == KEY_REPEAT) || (App->input->GetKey(SDL_SCANCODE_LALT) == KEY_DOWN)) && ((App->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN) || (App->input->GetKey(SDL_SCANCODE_F4) == KEY_REPEAT)))
 	{
-		App->input->quit = true;
+		App->Exit();
 	}
 
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
