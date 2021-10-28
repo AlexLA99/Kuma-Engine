@@ -4,6 +4,7 @@
 #include "glmath.h"
 #include "Light.h"
 #include "MeshImporter.h"
+#include "TextureImporter.h"
 #include <vector>
 #include <string>
 
@@ -24,7 +25,7 @@ public:
 	bool CleanUp();
 
 	void OnResize(int width, int height);
-	MeshInfo* LoadModel(const std::string& filename);
+	void LoadModel(const std::string& filename);
 	TextureInfo* CreateCheckerImage() const;
 
 	void SetDepthBufferEnabled();
@@ -41,9 +42,8 @@ public:
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
 
-	std::vector<MeshInfo*> mesh_array;
-
-	TextureInfo* CheckerTexture;
+	std::vector<MeshEntry*> mesh_array;
+	std::vector<TextureInfo*> tex_array;
 
 	bool depthEnabled = true;
 	bool wireframeMode = false;
@@ -51,10 +51,16 @@ public:
 
 private:
 
-	void LoadBuffer(MeshInfo* mesh, float* vertices, uint* indices);
-	void LoadTexture(TextureInfo* tex);
-	void DrawMesh(MeshInfo* mesh);
+	void LoadBuffer(MeshEntry* mesh);
+	void DrawMesh(MeshEntry* mesh);
+	void DrawObject(MeshEntry* mesh, TextureInfo* tex);
 	void DrawAllMeshes();
+	void DrawAllObjects(TextureInfo* tex);
+
+	TextureImporter* tex_imp;
+	MeshImporter* mesh_imp;
+
+	TextureInfo* checker_info;
 
  ////Testinng variables/////
 	//float *positions;

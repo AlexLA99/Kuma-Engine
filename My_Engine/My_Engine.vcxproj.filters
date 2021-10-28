@@ -35,6 +35,9 @@
     <Filter Include="Source Code\Dependencies\mmgr">
       <UniqueIdentifier>{f3e98185-075f-4775-b3be-8bca2da13500}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Code\Dependencies\Devil">
+      <UniqueIdentifier>{8aa0892d-7a99-4486-abc5-fd6cf5d3295c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\Application.cpp">
@@ -257,6 +260,30 @@
     </ClInclude>
     <ClInclude Include="Source Code\Dependencies\mmgr\mmgr.h">
       <Filter>Source Code\Dependencies\mmgr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\config.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\devil_internal_exports.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\il.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\ilu.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\ilut.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\ilut_config.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\ilu_region.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\il_wrap.h">
+      <Filter>Source Code\Dependencies\Devil</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

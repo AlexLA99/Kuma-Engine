@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "MeshImporter.h"
 #include "Assimp.h"
+#include "Application.h"
 
 #pragma comment (lib, "assimp.lib")
 
@@ -15,20 +16,20 @@ MeshImporter::~MeshImporter()
 {
 }
 
-MeshInfo* MeshImporter::LoadScene(const std::string& filename)
+MeshEntry* MeshImporter::LoadSceneMeshes(const std::string& filename)
 {
-	MeshInfo* ret = nullptr;
+	MeshEntry* ret = nullptr;
 	//import the scene from a file
-	const char* file_path = filename.c_str(); 
+	const char* file_path = filename.c_str();
 
-	//Assimp::Importer Importer; //what is this? Could it be a better implementation?
-	//const aiScene* scene = Importer.ReadFile(file_path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+	//Assimp::MeshImporter MeshImporter; //what is this? Could it be a better implementation?
+	//const aiScene* scene = MeshImporter.ReadFile(file_path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
 
 	LOG("Loading Model from file: %s", file_path);
 
 	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 
-	//Make sure the scene was loaded correctly
+	//Make sure the scene was loaded correct
 	if (scene != nullptr && scene->HasMeshes())
 	{
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
@@ -41,50 +42,33 @@ MeshInfo* MeshImporter::LoadScene(const std::string& filename)
 	{
 		LOG("No meshes at scene %s", file_path);
 	}
-
-	if (scene != nullptr && scene->HasMaterials())
-	{
-		/*	for (uint i = 0; i < scene->mNumMaterials; ++i)
-			{
-				
-			}*/
-	}
 	aiReleaseImport(scene);
 
 	return ret;
 }
 
-MeshInfo* MeshImporter::ImportMesh(const aiScene* scene, int i)
-{	
+MeshEntry* MeshImporter::ImportMesh(const aiScene* scene, int i)
+{
 	bool ret = true;
 
-	MeshInfo* ourMesh = new MeshInfo();
+	MeshEntry* ourMesh = new MeshEntry();
 	// New mesh
 	aiMesh* currentMesh = scene->mMeshes[i];
-	// copy vertices
-	ourMesh->num_vertices = currentMesh->mNumVertices;
-	// create a float array with the size of the number of vertices of the mesh * 3 accounting for x, y and z
-	ourMesh->vertices = new float[ourMesh->num_vertices * 3];
-	// store into the previously created array the content of the vertices array of the mesh we are loading
-	memcpy(ourMesh->vertices, currentMesh->mVertices, sizeof(float) * ourMesh->num_vertices * 3);
-		
-	if (currentMesh->HasTextureCoords(0))
-	{
-		ourMesh->num_tex_coords = currentMesh->mNumVertices;
-		ourMesh->texture_coords = new float[currentMesh->mNumVertices * 2];
-	
-		for (unsigned int i = 0; i < ourMesh->num_tex_coords; i++)
-		{
-			ourMesh->texture_coords[i * 2] = currentMesh->mTextureCoords[0][i].x;
-			ourMesh->texture_coords[i * 2 + 1] = currentMesh->mTextureCoords[0][i].y;
-		}
-	}
 
-	if (currentMesh->HasNormals())
+	// copy vertices
+	//ourMesh->num_vertices = currentMesh->mNumVertices;
+	// create a float array with 3 times the size of the number of vertices of the mesh
+	//ourMesh->vertices = new float[ourMesh->num_vertices * 3];
+	// store into the previously created array the content of the vertices array of the mesh we are loading
+	//memcpy(ourMesh->vertices, currentMesh->mVertices, sizeof(float) * ourMesh->num_vertices * 3);
+
+	ourMesh->num_vertices = currentMesh->mNumVertices;
+	ourMesh->vertices = new fvertex3[ourMesh->num_vertices];
+	for (uint i = 0; i < currentMesh->mNumVertices; ++i)
 	{
-		ourMesh->num_normals = currentMesh->mNumVertices;
-		ourMesh->normals = new float [currentMesh->mNumVertices * 3];
-		memcpy(ourMesh->normals, currentMesh->mNormals, sizeof(float) * ourMesh->num_normals * 3);
+		ourMesh->vertices[i].x = currentMesh->mVertices[i].x;
+		ourMesh->vertices[i].y = currentMesh->mVertices[i].y;
+		ourMesh->vertices[i].z = currentMesh->mVertices[i].z;
 	}
 
 	//copy faces
@@ -93,14 +77,13 @@ MeshInfo* MeshImporter::ImportMesh(const aiScene* scene, int i)
 		//copy number of indices
 		ourMesh->num_indices = currentMesh->mNumFaces * 3;
 		////create an array with the size of the number of indices
-		ourMesh->indices = new uint [ourMesh->num_indices];
+		ourMesh->indices = new uint[ourMesh->num_indices];
 		//for each face
 		for (uint i = 0; i < currentMesh->mNumFaces; ++i)
 		{
-			const aiFace& face = currentMesh->mFaces[i];
-			if (face.mNumIndices != 3)
+			if (currentMesh->mFaces[i].mNumIndices != 3)
 			{
-				LOG("WARNING, geometry face with != 3 indices!");	
+				LOG("WARNING, geometry face with != 3 indices!");
 			}
 			else
 			{
@@ -109,6 +92,27 @@ MeshInfo* MeshImporter::ImportMesh(const aiScene* scene, int i)
 			}
 		}
 	}
+
+	if (currentMesh->HasNormals())
+	{
+		ourMesh->num_normals = currentMesh->mNumVertices;
+		ourMesh->normals = new float[currentMesh->mNumVertices * 3];
+		memcpy(ourMesh->normals, currentMesh->mNormals, sizeof(float) * ourMesh->num_normals * 3);
+	}
+
+	if (currentMesh->HasTextureCoords(0))
+	{
+		ourMesh->num_tex_coords = scene->mMeshes[i]->mNumVertices;
+		ourMesh->texture_coords = new float[scene->mMeshes[i]->mNumVertices * 2];
+
+		for (unsigned int j = 0; j < ourMesh->num_tex_coords; ++j)
+		{
+			ourMesh->texture_coords[j * 2] = currentMesh->mTextureCoords[0][j].x;
+			ourMesh->texture_coords[j * 2 + 1] = currentMesh->mTextureCoords[0][j].y;
+		}
+		LOG("has texture coords: %d", ourMesh->num_tex_coords);
+	}
+
 	return ourMesh;
 }
 
