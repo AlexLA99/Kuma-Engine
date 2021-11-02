@@ -6,9 +6,11 @@ Simple geometry viewer with some UI to visualize some data about the scene and t
  
 ## Controls
 
- - w, a, s, d to move arround
+ - w, a, s, d  + Right click to move arround
 
- - left mouse click to rotate
+ - r, f + Right click to go up and down 
+
+ - left mouse click + left alt to rotate
 
  - shift to accelerate while moving
 
