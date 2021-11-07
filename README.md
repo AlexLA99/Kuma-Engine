@@ -14,7 +14,7 @@ Simple geometry viewer with some UI to visualize some data about the scene and t
 
  - shift to accelerate while moving
 
-## Thinks to have in account
+## Thinks to have into account
 
 For some unknown reason, it cannot load textures.
 In the branch Game Object (https://github.com/AlexLA99/Kuma-Engine/tree/GameObject) the windows hierarchy and inspector work, but meshes doesn't render in the screen.
