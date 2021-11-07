@@ -54,96 +54,93 @@ bool TextureImporter::Init()
 	return ret;
 }
 
-TextureInfo* TextureImporter::LoadSceneTextures(const std::string& filename)
+//TextureInfo* TextureImporter::LoadSceneTextures(const std::string& filename, const std::string& texturename)
+//{
+//	TextureInfo* ret = nullptr;
+//	//import the scene from a file
+//	const char* file_path = filename.c_str();
+//	const char* texture_path = texturename.c_str();
+//
+//	//Assimp::MeshImporter MeshImporter; //what is this? Could it be a better implementation?
+//	//const aiScene* scene = MeshImporter.ReadFile(file_path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+//
+//	LOG("Loading Model from file: %s", file_path);
+//
+//	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+//
+//	//Make sure the scene was loaded correctly and has materials to load
+//	if (scene != nullptr && scene->HasMaterials())
+//	{
+//		// Use scene->mNumMeshes to iterate on scene->mMaterials array
+//		for (uint i = 0; i < scene->mNumMaterials; ++i)
+//		{
+//			ret = ImportTexture(texture_path);
+//		}
+//	}
+//	else
+//		LOG("No materials at scene: %s", file_path);
+//	aiReleaseImport(scene);
+//
+//	return ret;
+//}
+
+TextureInfo* TextureImporter::ImportTexture(const char* path)
 {
-	TextureInfo* ret = nullptr;
-	//import the scene from a file
-	const char* file_path = filename.c_str();
+	TextureInfo* newTexture = new TextureInfo;
+	uint i;
 
-	//Assimp::MeshImporter MeshImporter; //what is this? Could it be a better implementation?
-	//const aiScene* scene = MeshImporter.ReadFile(file_path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_JoinIdenticalVertices);
+	ilGenImages(1, &i);
+	ilBindImage(i);
 
-	LOG("Loading Model from file: %s", file_path);
-
-	const aiScene* scene = aiImportFile(file_path, aiProcessPreset_TargetRealtime_MaxQuality | aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-
-	//Make sure the scene was loaded correctly and has materials to load
-	if (scene != nullptr && scene->HasMaterials())
+	if (ilLoadImage(path))
 	{
-		// Use scene->mNumMeshes to iterate on scene->mMaterials array
-		for (uint i = 0; i < scene->mNumMaterials; ++i)
+		ILinfo ImgInfo;
+		iluGetImageInfo(&ImgInfo);
+
+		if (ImgInfo.Origin == IL_ORIGIN_UPPER_LEFT)
+			iluFlipImage();
+
+		if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE))
 		{
-			ret = ImportTexture(scene, i);
+			newTexture->tex_ID = CreateTexture(ilGetData(), ilGetInteger(IL_IMAGE_WIDTH), ilGetInteger(IL_IMAGE_HEIGHT), ilGetInteger(IL_IMAGE_FORMAT));
+			newTexture->tex_height = ilGetInteger(IL_IMAGE_HEIGHT);
+			newTexture->tex_width = ilGetInteger(IL_IMAGE_WIDTH);
+			newTexture->tex_path = path;
+
+			LOG("Successfully loaded Texture from: %s", path);
+		}
+		else
+		{
+			LOG("(ERROR)Could not convert image %s", path);
 		}
 	}
 	else
-		LOG("No materials at scene: %s", file_path);
-	aiReleaseImport(scene);
+	{
+		LOG("(ERROR) Error loading Image %s", path);
+	}
 
-	return ret;
+	return newTexture;
 }
 
-TextureInfo* TextureImporter::ImportTexture(const aiScene* pScene, int i)
+uint TextureImporter::CreateTexture(const void* data, uint width, uint height, uint format)
 {
-	TextureInfo* tex = new TextureInfo;
-	aiMaterial* currentMaterial = pScene->mMaterials[i];
+	uint id;
 
-	if (currentMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
-		aiString Path;
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &id);
+	glBindTexture(GL_TEXTURE_2D, id);
 
-		if (currentMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &Path, NULL, NULL, NULL, NULL, NULL) == AI_SUCCESS)
-		{
-			std::string temp_path = Path.data;
-			std::string final_path = "Assets/Textures/";
-			final_path.append(temp_path.c_str());
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-			tex->tex_path = final_path.c_str();
-			ILuint ImageName;
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height,
+		0, format, GL_UNSIGNED_BYTE, data);
 
-			ilGenImages(1, &ImageName);
-			ilBindImage(ImageName);
+	glBindTexture(GL_TEXTURE_2D, 0);
 
-			if (!ilLoadImage(tex->tex_path))
-			{
-				ILenum Error;
-				while ((Error = ilGetError()) != IL_NO_ERROR) {
-					LOG("%d: %s/n", Error, iluErrorString(Error));
-				}
-
-				LOG("Failed to load Image: %s.", tex->tex_path);
-			}
-			else
-			{
-				tex->tex_ID = ilutGLBindTexImage();
-
-				if (ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE));
-
-				tex->tex_width = ilGetInteger(IL_IMAGE_WIDTH);
-				tex->tex_height = ilGetInteger(IL_IMAGE_HEIGHT);
-				tex->tex_bit_depth = ilGetInteger(IL_IMAGE_BYTES_PER_PIXEL);
-				tex->tex_format = ilGetInteger(IL_IMAGE_FORMAT);
-				tex->tex_data = ilGetData();
-
-				glGenTextures(1, &tex->tex_ID);
-
-				glBindTexture(GL_TEXTURE_2D, tex->tex_ID);
-
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tex->tex_width, tex->tex_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, tex->tex_data); //which one is better? difference?
-				glGenerateMipmap(GL_TEXTURE_2D);
-				//gluBuild2DMipmaps(GL_TEXTURE_2D, tex->tex_bit_depth, tex->tex_width, tex->tex_height, tex->tex_format, GL_UNSIGNED_BYTE, tex->tex_data);
-
-				ilDeleteImage(ImageName);
-				glBindTexture(GL_TEXTURE_2D, 0);
-				return tex;
-			}
-		}
-	}
-	return tex;
+	return id;
 }
 
 uint* TextureImporter::CheckerImage()

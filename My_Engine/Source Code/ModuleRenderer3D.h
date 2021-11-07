@@ -26,6 +26,7 @@ public:
 
 	void OnResize(int width, int height);
 	void LoadModel(const std::string& filename);
+	void LoadTexture(const char* texturename);
 	TextureInfo* CreateCheckerImage() const;
 
 	void SetDepthBufferEnabled();

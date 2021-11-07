@@ -125,6 +125,7 @@ bool ModuleRenderer3D::Init()
 	tex_array.push_back(CreateCheckerImage());
 
 	LoadModel("Assets/Models/BakerHouse.fbx");
+	LoadTexture("Assets/Textures/Baker_house.png");
 
 
 // Modern OpenGL square ////////////////////
@@ -254,7 +255,11 @@ void ModuleRenderer3D::LoadModel(const std::string& filename)
 	LoadBuffer(temp1);
 	mesh_array.push_back(temp1);
 
-	TextureInfo* temp2 = tex_imp->LoadSceneTextures(filename);
+}
+
+void ModuleRenderer3D::LoadTexture(const char* texturename)
+{
+	TextureInfo* temp2 = tex_imp->ImportTexture(texturename);
 	tex_array.push_back(temp2);
 }
 
@@ -367,9 +372,13 @@ void ModuleRenderer3D::FileDropCheck()
 
 			if (strstr(event.drop.file, "fbx") != nullptr)
 				LoadModel(event.drop.file);
+			
 
-			/*if (strstr(event.drop.file, "png") != nullptr || strstr(event.drop.file, "dds") != nullptr)
-				App->scene_intro->selectedObject->AddComponent(new ComponentTexture(App->scene_intro->selectedObject, event.drop.file, Importer::TextureImp::Import(event.drop.file)));*/
+			else if (strstr(event.drop.file, "png") != nullptr || strstr(event.drop.file, "dds") != nullptr)
+				LoadTexture(event.drop.file);
+
+			else
+				LOG("Could not load the object");
 
 			break;
 		}
