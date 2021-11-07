@@ -14,19 +14,19 @@ public:
 	void Update() override;
 	void DrawInspector() override;
 
-	float4x4 GetTransform() const;
-	float3 GetPosition()const;
-	float3 GetScale()const;
+	//float4x4 GetTransform() const;
+	vec3 GetPosition()const;
+	vec3 GetScale()const;
 
-	void SetPosition(float3 position);
-	void SetScale(float3 scale);
-	void RecalculateMatrix();
+	void SetPosition(vec3 position);
+	void SetScale(vec3 scale);
+	//void RecalculateMatrix();
 
 private:
 
-	float4x4 transform;
-	float3 position;
-	float3 scale;
-	Quat rotation;
+	//float4x4 transform;
+	vec3 position;
+	vec3 scale;
+	//Quat rotation;
 
 };

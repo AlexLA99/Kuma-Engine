@@ -1,13 +1,14 @@
 #include "Component.h"
 #include "ComponentTransform.h"
 #include "ImGui.h"
+#include <vector>
 
 ComponentTransform::ComponentTransform(GameObject* owner) : Component(ComponentType::TRANSFORM, owner)
 {
-	position = float3(0.f, 0.f, 0.f);
-	scale = float3(1.f, 1.f, 1.f);
-	rotation = Quat::identity;
-	transform = float4x4::FromTRS(position, rotation, scale);
+	position = vec3(0.f, 0.f, 0.f);
+	scale = vec3(1.f, 1.f, 1.f);
+	//rotation = Quat::identity;
+	//transform = float4x4::FromTRS(position, rotation, scale);
 }
 
 ComponentTransform::~ComponentTransform()
@@ -29,34 +30,34 @@ void  ComponentTransform::DrawInspector()
 	}
 }
 
-float4x4 ComponentTransform::GetTransform() const
-{
-	return transform;
-}
+//float4x4 ComponentTransform::GetTransform() const
+//{
+//	return transform;
+//}
 
-float3 ComponentTransform::GetPosition()const
+vec3 ComponentTransform::GetPosition()const
 {
 	return position;
 }
 
-float3 ComponentTransform::GetScale()const
+vec3 ComponentTransform::GetScale()const
 {
 	return scale;
 }
 
-void ComponentTransform::SetPosition(float3 position)
+void ComponentTransform::SetPosition(vec3 position)
 {
 	this->position = position;
-	RecalculateMatrix();
+	//RecalculateMatrix();
 }
 
-void ComponentTransform::SetScale(float3 scale)
+void ComponentTransform::SetScale(vec3 scale)
 {
 	this->scale = scale;
-	RecalculateMatrix();
+	//RecalculateMatrix();
 }
 
-void ComponentTransform::RecalculateMatrix()
-{
-	transform = float4x4::FromTRS(position, rotation, scale);
-}
+//void ComponentTransform::RecalculateMatrix()
+//{
+//	transform = float4x4::FromTRS(position, rotation, scale);
+//}

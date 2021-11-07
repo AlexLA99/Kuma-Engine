@@ -38,6 +38,9 @@
     <Filter Include="Source Code\Dependencies\Devil">
       <UniqueIdentifier>{8aa0892d-7a99-4486-abc5-fd6cf5d3295c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Code\GameObject">
+      <UniqueIdentifier>{ec9811f5-74a5-4953-930c-c32fef14c828}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source Code\Application.cpp">
@@ -129,6 +132,21 @@
     </ClCompile>
     <ClCompile Include="Source Code\Dependencies\mmgr\mmgr.cpp">
       <Filter>Source Code\Dependencies\mmgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\Component.cpp">
+      <Filter>Source Code\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentMesh.cpp">
+      <Filter>Source Code\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentTexture.cpp">
+      <Filter>Source Code\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\ComponentTransform.cpp">
+      <Filter>Source Code\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Code\GameObject.cpp">
+      <Filter>Source Code\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -284,6 +302,21 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Descargas\Thor-Engine-master\ThorEngine\Source Code\External Libraries\Devil\include\il_wrap.h">
       <Filter>Source Code\Dependencies\Devil</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\Component.h">
+      <Filter>Source Code\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ComponentMesh.h">
+      <Filter>Source Code\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ComponentTexture.h">
+      <Filter>Source Code\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\ComponentTransform.h">
+      <Filter>Source Code\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Source Code\GameObject.h">
+      <Filter>Source Code\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
