@@ -399,6 +399,7 @@ void ModuleRenderer3D::DrawObject(MeshEntry* mesh, TextureInfo* tex)
 }
 
 
+
 void ModuleRenderer3D::DrawAllMeshes()
 {	
 	for (int m = 0; m < mesh_array.size(); m++)

@@ -31,6 +31,7 @@ public:
 	void SetDepthBufferEnabled();
 	bool GetVSync() const;
 	void SetVSync(bool vsync);
+	void DrawMesh(MeshEntry* mesh);
 
 	
 	
@@ -38,6 +39,8 @@ public:
 
 	Light lights[MAX_LIGHTS];
 	SDL_GLContext gl_context;
+
+	SDL_Event event;
 
 	mat3x3 NormalMatrix;
 	mat4x4 ModelMatrix, ViewMatrix, ProjectionMatrix;
@@ -52,7 +55,6 @@ public:
 private:
 
 	void LoadBuffer(MeshEntry* mesh);
-	void DrawMesh(MeshEntry* mesh);
 	void DrawObject(MeshEntry* mesh, TextureInfo* tex);
 	void DrawAllMeshes();
 	void DrawAllObjects(TextureInfo* tex);

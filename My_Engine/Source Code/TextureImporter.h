@@ -33,4 +33,5 @@ public:
 	uint* CheckerImage();
 	TextureInfo* LoadSceneTextures(const std::string& filename);
 	TextureInfo* ImportTexture(const aiScene* pScene, int i);
+	uint CreateTexture(const void* data, uint width, uint height, uint format);
 };

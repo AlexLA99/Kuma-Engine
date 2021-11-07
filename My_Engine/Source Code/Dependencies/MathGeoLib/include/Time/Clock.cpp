@@ -22,10 +22,6 @@
 #include <sys/time.h>
 #endif
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 #ifdef EMSCRIPTEN
 #include <emscripten.h>
 #endif
@@ -34,11 +30,16 @@
 #include <mach/mach_time.h>
 #endif
 
+#include <windows.h>
 #include "Clock.h"
 #include "../Math/myassert.h"
 #include "../Math/assume.h"
 
 MATH_BEGIN_NAMESPACE
+
+#ifdef WIN32
+#include <windows.h>
+#endif
 
 #ifdef WIN32
 LARGE_INTEGER Clock::ddwTimerFrequency;
@@ -104,13 +105,13 @@ void Clock::Sleep(int milliseconds)
 #elif defined(WIN32)
 	::Sleep(milliseconds);
 #elif !defined(__native_client__) && !defined(EMSCRIPTEN)
-	//// http://linux.die.net/man/2/nanosleep
-	//timespec ts;
-	//ts.tv_sec = milliseconds / 1000;
-	//ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
-	//int ret = nanosleep(&ts, NULL);
-	//if (ret == -1)
-	//	LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
+	// http://linux.die.net/man/2/nanosleep
+	timespec ts;
+	ts.tv_sec = milliseconds / 1000;
+	ts.tv_nsec = (milliseconds - ts.tv_sec * 1000) * 1000 * 1000;
+	int ret = nanosleep(&ts, NULL);
+	if (ret == -1)
+		LOGI("nanosleep returned -1! Reason: %s(%d).", strerror(errno), (int)errno);
 #else
 #warning Clock::Sleep has not been implemented!
 #endif
