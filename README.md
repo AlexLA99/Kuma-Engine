@@ -16,7 +16,6 @@ Simple geometry viewer with some UI to visualize some data about the scene and t
 
 ## Thinks to have in account
 
-Drag and Drop works, but sometimes it doesn't detect it. Just try it again.
 For some unknown reason, it cannot load textures.
 
 ## Developer

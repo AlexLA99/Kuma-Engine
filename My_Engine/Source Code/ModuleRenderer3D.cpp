@@ -194,7 +194,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	glEnd();
 	glFlush();*/
-	FileDropCheck();
+	//FileDropCheck();
 
 	return UPDATE_CONTINUE;
 }
@@ -357,33 +357,33 @@ TextureInfo* ModuleRenderer3D::CreateCheckerImage() const
 	return tex;
 }
 
-void ModuleRenderer3D::FileDropCheck()
-{
-	//SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
-
-
-	while (SDL_PollEvent(&event))
-	{
-		switch (event.type)
-		{
-		case (SDL_DROPFILE):
-
-			LOG("File was dropped");
-
-			if (strstr(event.drop.file, "fbx") != nullptr)
-				LoadModel(event.drop.file);
-			
-
-			else if (strstr(event.drop.file, "png") != nullptr || strstr(event.drop.file, "dds") != nullptr)
-				LoadTexture(event.drop.file);
-
-			else
-				LOG("Could not load the object");
-
-			break;
-		}
-	}
-}
+//void ModuleRenderer3D::FileDropCheck()
+//{
+//	//SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+//
+//
+//	while (SDL_PollEvent(&event))
+//	{
+//		switch (event.type)
+//		{
+//		case (SDL_DROPFILE):
+//
+//			LOG("File was dropped");
+//
+//			if (strstr(event.drop.file, "fbx") != nullptr)
+//				LoadModel(event.drop.file);
+//			
+//
+//			else if (strstr(event.drop.file, "png") != nullptr || strstr(event.drop.file, "dds") != nullptr)
+//				LoadTexture(event.drop.file);
+//
+//			else
+//				LOG("Could not load the object");
+//
+//			break;
+//		}
+//	}
+//}
 
 void ModuleRenderer3D::DrawMesh(MeshEntry* mesh)
 {

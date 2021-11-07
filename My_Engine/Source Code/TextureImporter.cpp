@@ -118,8 +118,8 @@ TextureInfo* TextureImporter::ImportTexture(const char* path)
 	{
 		LOG("(ERROR) Error loading Image %s", path);
 	}
-
 	return newTexture;
+
 }
 
 uint TextureImporter::CreateTexture(const void* data, uint width, uint height, uint format)

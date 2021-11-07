@@ -116,6 +116,22 @@ update_status ModuleInput::PreUpdate(float dt)
 			quit = true;
 			break;
 
+		case (SDL_DROPFILE):
+
+			LOG("File was dropped");
+
+			if (strstr(e.drop.file, "fbx") != nullptr)
+				App->renderer3D->LoadModel(e.drop.file);
+
+
+			else if (strstr(e.drop.file, "png") != nullptr || strstr(e.drop.file, "dds") != nullptr)
+				App->renderer3D->LoadTexture(e.drop.file);
+
+			else
+				LOG("Could not load the object");
+
+			break;
+
 		case SDL_WINDOWEVENT:
 
 			if (e.window.event == SDL_WINDOWEVENT_RESIZED)
