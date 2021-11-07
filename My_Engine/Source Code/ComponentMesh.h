@@ -2,7 +2,7 @@
 
 
 class Component;
-struct MeshEntry;
+class MeshEntry;
 
 class ComponentMesh : public Component
 {

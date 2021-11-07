@@ -121,11 +121,11 @@ update_status ModuleInput::PreUpdate(float dt)
 			LOG("File was dropped");
 
 			if (strstr(e.drop.file, "fbx") != nullptr)
-				App->renderer3D->LoadModel(e.drop.file);
+				App->renderer3D->CreateGameObject(_strdup("Imported Game Object"), e.drop.file, _strdup(""));
 
 
-			else if (strstr(e.drop.file, "png") != nullptr || strstr(e.drop.file, "dds") != nullptr)
-				App->renderer3D->LoadTexture(e.drop.file);
+			/*else if (strstr(e.drop.file, "png") != nullptr || strstr(e.drop.file, "dds") != nullptr)
+				App->renderer3D->LoadTexture(e.drop.file);*/
 
 			else
 				LOG("Could not load the object");

@@ -41,19 +41,20 @@ void  ComponentMesh::DrawInspector()
 
 void ComponentMesh::DrawMesh()
 {
+	LOG("Loading Mesh");
 	if (active)
 	{
 		if (owner->texture != nullptr)
 		{
 			if (owner->texture->IsEnabled())
 			{
-				App->renderer3D->DrawMesh(mesh);
+				App->renderer3D->DrawObject(mesh, owner->texture->GetTexture());
 				return;
 			}
 		}
 	}
-
-	App->renderer3D->DrawMesh(mesh);
+	
+	App->renderer3D->DrawObject(mesh, 0);
 }
 
 char* ComponentMesh::GetPath()const

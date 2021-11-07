@@ -59,7 +59,7 @@ public:
     ~MeshImporter();
 
     MeshEntry* ImportMesh(const aiScene* scene, int i);
-    MeshEntry* LoadSceneMeshes(const std::string& filename);
+    std::vector <MeshEntry*> LoadSceneMeshes(const std::string& filename);
 
 
 private:

@@ -1,25 +1,25 @@
 #pragma once
 class Component;
-struct Texture;
+class TextureInfo;
 
 class ComponentTexture : public Component
 {
 public:
 	ComponentTexture(GameObject* owner);
-	ComponentTexture(GameObject* owner, char* path, Texture* mesh);
+	ComponentTexture(GameObject* owner, char* path, TextureInfo* mesh);
 	~ComponentTexture();
 
 	void Update() override;
 	void DrawInspector() override;
 
 	char* GetPath()const;
-	Texture* GetTexture() const;
+	TextureInfo* GetTexture() const;
 
 	bool IsEnabled();
 	void SwitchEnabledTexture();
 private:
 
-	Texture* texture = nullptr;
+	TextureInfo* texture = nullptr;
 	char* path;
 
 };

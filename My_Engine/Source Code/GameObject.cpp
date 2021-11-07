@@ -24,6 +24,7 @@ void GameObject::Update()
 	std::vector<Component*>::iterator item = components.begin();
 	for (; item != components.end(); ++item)
 	{
+		
 		(*item)->Update();
 	}
 

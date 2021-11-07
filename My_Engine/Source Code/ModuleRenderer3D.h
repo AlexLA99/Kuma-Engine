@@ -11,6 +11,7 @@
 #define MAX_LIGHTS 8
 
 class TextureInfo;
+class GameObject;
 
 class ModuleRenderer3D : public Module
 {
@@ -33,6 +34,9 @@ public:
 	bool GetVSync() const;
 	void SetVSync(bool vsync);
 	void DrawMesh(MeshEntry* mesh);
+	void DrawObject(MeshEntry* mesh, TextureInfo* tex);
+	void SetSelectedObject(GameObject* object);
+	GameObject* CreateGameObject(char* name, char* meshPath, char* texturePath);
 
 	
 	
@@ -49,6 +53,9 @@ public:
 	std::vector<MeshEntry*> mesh_array;
 	std::vector<TextureInfo*> tex_array;
 
+	std::vector<GameObject*> gameObjects;
+	GameObject* selectedObject = nullptr;
+
 	bool depthEnabled = true;
 	bool wireframeMode = false;
 	bool vsync = true;
@@ -56,14 +63,16 @@ public:
 private:
 
 	void LoadBuffer(MeshEntry* mesh);
-	void DrawObject(MeshEntry* mesh, TextureInfo* tex);
+	
 	void DrawAllMeshes();
 	void DrawAllObjects(TextureInfo* tex);
 	//void FileDropCheck();
 
+
+
 	TextureImporter* tex_imp;
 	MeshImporter* mesh_imp;
-
+	
 	TextureInfo* checker_info;
 
  ////Testinng variables/////

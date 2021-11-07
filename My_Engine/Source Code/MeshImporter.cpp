@@ -16,9 +16,9 @@ MeshImporter::~MeshImporter()
 {
 }
 
-MeshEntry* MeshImporter::LoadSceneMeshes(const std::string& filename)
+std::vector<MeshEntry*> MeshImporter::LoadSceneMeshes(const std::string& filename)
 {
-	MeshEntry* ret = nullptr;
+	std::vector<MeshEntry*> ret;
 	//import the scene from a file
 	const char* file_path = filename.c_str();
 
@@ -35,7 +35,7 @@ MeshEntry* MeshImporter::LoadSceneMeshes(const std::string& filename)
 		// Use scene->mNumMeshes to iterate on scene->mMeshes array
 		for (uint i = 0; i < scene->mNumMeshes; ++i)
 		{
-			ret = ImportMesh(scene, i);
+			ret.push_back(ImportMesh(scene, i));
 		}
 	}
 	else

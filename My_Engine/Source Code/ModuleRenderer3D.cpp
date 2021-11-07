@@ -7,6 +7,11 @@
 #include "OpenGl.h"
 #include "Assimp.h"
 
+#include "Component.h"
+#include "GameObject.h"
+#include "ComponentMesh.h"
+#include "ComponentTexture.h"
+
 #include "Dependencies/Devil/include/ilut.h"
 
 #pragma comment (lib, "glu32.lib")    /* link OpenGL Utility lib     */
@@ -124,8 +129,10 @@ bool ModuleRenderer3D::Init()
 	//temporary till i figure ou where to put it
 	tex_array.push_back(CreateCheckerImage());
 
-	LoadModel("Assets/Models/BakerHouse.fbx");
-	LoadTexture("Assets/Textures/Baker_house.png");
+	/*LoadModel("Assets/Models/BakerHouse.fbx");
+	LoadTexture("Assets/Textures/Baker_house.png");*/
+
+	CreateGameObject(_strdup("BakerHouse"), _strdup("Assets/Models/BakerHouse.fbx"), _strdup("Assets/Textures/Baker_house.png"));
 
 
 // Modern OpenGL square ////////////////////
@@ -213,7 +220,7 @@ update_status ModuleRenderer3D::PostUpdate(float dt)
 	}*/
 
 	//DrawAllMeshes();
-	DrawAllObjects(tex_array[1]);
+	//DrawAllObjects(tex_array[1]);
 	//ImGui Render
 	App->menu->Render();
 
@@ -249,19 +256,19 @@ void ModuleRenderer3D::OnResize(int width, int height)
 	glLoadIdentity();
 }
 
-void ModuleRenderer3D::LoadModel(const std::string& filename)
-{
-	MeshEntry* temp1 = mesh_imp->LoadSceneMeshes(filename);
-	LoadBuffer(temp1);
-	mesh_array.push_back(temp1);
-
-}
-
-void ModuleRenderer3D::LoadTexture(const char* texturename)
-{
-	TextureInfo* temp2 = tex_imp->ImportTexture(texturename);
-	tex_array.push_back(temp2);
-}
+//void ModuleRenderer3D::LoadModel(const std::string& filename)
+//{
+//	MeshEntry* temp1 = mesh_imp->LoadSceneMeshes(filename);
+//	LoadBuffer(temp1);
+//	mesh_array.push_back(temp1);
+//
+//}
+//
+//void ModuleRenderer3D::LoadTexture(const char* texturename)
+//{
+//	TextureInfo* temp2 = tex_imp->ImportTexture(texturename);
+//	tex_array.push_back(temp2);
+//}
 
 void ModuleRenderer3D::LoadBuffer(MeshEntry* mesh)
 {
@@ -432,6 +439,43 @@ void ModuleRenderer3D::DrawObject(MeshEntry* mesh, TextureInfo* tex)
 
 }
 
+GameObject* ModuleRenderer3D::CreateGameObject(char* name, char* meshPath, char* texturePath)
+{
+	GameObject* newGameObject = new GameObject(nullptr, name);
+	gameObjects.push_back(newGameObject);
+
+	if (meshPath != "")
+	{
+		std::vector<MeshEntry*> meshes = mesh_imp->LoadSceneMeshes(meshPath);;
+		LOG("Loading Mesh 1");
+		if (meshes.size() == 1)
+		{
+			LOG("Loading Mesh 2");
+			newGameObject->AddComponent(new ComponentMesh(newGameObject, meshPath, meshes.front()));
+			if (texturePath != nullptr)
+				newGameObject->AddComponent(new ComponentTexture(gameObjects.back(), texturePath, tex_imp->ImportTexture(texturePath)));
+		}
+		else
+		{
+			std::vector<MeshEntry*>::iterator item = meshes.begin();
+			for (; item != meshes.end(); ++item)
+			{
+				GameObject* childGameObject = new GameObject(newGameObject, _strdup("MeshObject"));
+				ComponentMesh* newComp = new ComponentMesh(childGameObject, meshPath, (*item));
+
+				childGameObject->AddComponent((Component*)newComp);
+
+				if (texturePath != nullptr)
+					childGameObject->AddComponent(new ComponentTexture(gameObjects.back(), texturePath, tex_imp->ImportTexture(texturePath)));
+
+				newGameObject->children.push_back(childGameObject);
+			}
+		}
+	}
+
+	return newGameObject;
+}
+
 
 
 void ModuleRenderer3D::DrawAllMeshes()
@@ -447,6 +491,15 @@ void ModuleRenderer3D::DrawAllObjects(TextureInfo* texture)
 	for (int m = 0; m < mesh_array.size(); m++)
 	{
 		DrawObject(mesh_array[m], texture);
+	}
+}
+
+void ModuleRenderer3D::SetSelectedObject(GameObject* object)
+{
+	if (object != nullptr)
+	{
+		selectedObject = object;
+		LOG("Object selected: %s", selectedObject->GetName());
 	}
 }
            

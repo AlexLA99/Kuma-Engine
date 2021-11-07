@@ -15,6 +15,12 @@ public:
 
 	void CleanUp() override;
 
+	bool check = false;
+	bool wireframe;
+	bool vertexlines;
+	bool facelines;
+	bool depthtest;
+
 private:
 
 };

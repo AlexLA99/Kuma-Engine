@@ -12,7 +12,7 @@ ComponentTexture::ComponentTexture(GameObject* owner) : Component(ComponentType:
 
 }
 
-ComponentTexture::ComponentTexture(GameObject* owner, char* path, Texture* texture = nullptr) : Component(ComponentType::TEXTURE, owner), texture(texture), path(path)
+ComponentTexture::ComponentTexture(GameObject* owner, char* path, TextureInfo* texture = nullptr) : Component(ComponentType::TEXTURE, owner), texture(texture), path(path)
 {
 
 }
@@ -41,7 +41,7 @@ char* ComponentTexture::GetPath()const
 	return path;
 }
 
-Texture* ComponentTexture::GetTexture() const
+TextureInfo* ComponentTexture::GetTexture() const
 {
 	return texture;
 }
