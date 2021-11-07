@@ -193,6 +193,7 @@ update_status ModuleRenderer3D::PreUpdate(float dt)
 
 	glEnd();
 	glFlush();*/
+	FileDropCheck();
 
 	return UPDATE_CONTINUE;
 }
@@ -349,6 +350,30 @@ TextureInfo* ModuleRenderer3D::CreateCheckerImage() const
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	return tex;
+}
+
+void ModuleRenderer3D::FileDropCheck()
+{
+	//SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
+
+
+	while (SDL_PollEvent(&event))
+	{
+		switch (event.type)
+		{
+		case (SDL_DROPFILE):
+
+			LOG("File was dropped");
+
+			if (strstr(event.drop.file, "fbx") != nullptr)
+				LoadModel(event.drop.file);
+
+			/*if (strstr(event.drop.file, "png") != nullptr || strstr(event.drop.file, "dds") != nullptr)
+				App->scene_intro->selectedObject->AddComponent(new ComponentTexture(App->scene_intro->selectedObject, event.drop.file, Importer::TextureImp::Import(event.drop.file)));*/
+
+			break;
+		}
+	}
 }
 
 void ModuleRenderer3D::DrawMesh(MeshEntry* mesh)

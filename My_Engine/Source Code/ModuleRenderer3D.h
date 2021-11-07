@@ -58,6 +58,7 @@ private:
 	void DrawObject(MeshEntry* mesh, TextureInfo* tex);
 	void DrawAllMeshes();
 	void DrawAllObjects(TextureInfo* tex);
+	void FileDropCheck();
 
 	TextureImporter* tex_imp;
 	MeshImporter* mesh_imp;
